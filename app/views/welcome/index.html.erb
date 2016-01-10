@@ -1,0 +1,190 @@
+<div class="row">
+	<nav class="col-xs-3 menu">
+		<ul>
+			<li class="withripple active" data-target="#inicio">
+				Inicio
+				<div class="ripple-container"></div>
+			</li>
+			<li class="withripple" data-target="#proyectos">
+				Proyectos
+				<div class="ripple-container"></div>
+			</li>
+			<li class="withripple" data-target="#screencast">
+				ScreenCast
+				<div class="ripple-container"></div>
+			</li>
+			<li class="withripple" data-target="#about">
+				Sobre mi...
+				<div class="ripple-container"></div>
+			</li>
+		</ul>
+	</nav>
+	<div class="pages col-xs-9">
+		<div class="row">
+			<div class="col-xs-11">
+				<div class="well page active" id="inicio">
+					<h1 class="header">Bienvenidos</h1>
+					<p>Aquí va cualquier clase de texto</p>
+				</div>
+				<!-- Proyectos -->
+				<div class="well page" id="proyectos" style="display:none;">
+					<h1 class="header">Proyectos</h1>
+					<p>Listado de Proyectos o colaboraciones realizadas por mi</p>
+					<div class="list-group">
+						<div class="list-group-item">
+							<div class="row-action-primary">
+								<i class="material-icons">folder</i>
+							</div>
+							<div class="row-content">
+								<div class="action-secondary">
+									<i class="material-icons"><%= link_to 'backup', 'https://github.com/AndresAR/Odonmed', {'target' => '_blank'}%></i>
+								</div>
+								<h4 class="list-group-item-heading">OdonMed</h4>
+								<p class="list-group-item-text">Sistema de administración y gestión de pacientes</p>
+							</div>
+						</div>
+						<div class="list-group-separator"></div>
+						<div class="list-group-item">
+							<div class="row-action-primary">
+								<i class="material-icons">folder</i>
+							</div>
+							<div class="row-content">
+								<div class="action-secondary">
+									<i class="material-icons">
+										<%= link_to 'backup', 'https://github.com/AndresAR/Vademecum', {'target' => '_blank'}%>
+									</i>
+								</div>
+								<h4 class="list-group-item-heading">Vademecum</h4>
+								<p class="list-group-item-text">Listado de medicamentos, en donde podrás encontrar forma de uso, dosis entre otros.</p>
+							</div>
+						</div>
+						<div class="list-group-separator"></div>
+						<div class="list-group-item">
+							<div class="row-action-primary">
+								<i class="material-icons">folder</i>
+							</div>
+							<div class="row-content">
+								<div class="action-secondary">
+									<i class="material-icons">
+										<%= link_to 'backup', 'http://www.radioclandestina.cl', {'target' => '_blank'}%>
+									</i>
+								</div>
+								<h4 class="list-group-item-heading">RadioClandestina</h4>
+								<p class="list-group-item-text">Sitio Web de Radio por streaming, el proyecto actualmente cumple más de 10 años de vida</p>
+							</div>
+						</div>
+						<div class="list-group-separator"></div>
+					</div>
+				</div>
+				
+				<!-- ScreenCast -->
+				<div class="well page" id="screencast" style="display:none;">
+					<h1 class="header">ScreenCast</h1>
+					<p>Aquí va cualquier clase de texto</p>
+					<div class="list-group">
+						<div class="list-group-item">
+							<div class="row-picture">
+								<img class="circle" src="http://restrack.me/images/rails-logo.png" alt="icon">
+							</div>
+							<div class="row-content">
+								<h4 class="list-group-item-heading">Blog</h4>
+								<p class="list-group-item-text">Sitio para entender el funcionamiento y programación con el FrameWork Ruby on Rails</p>
+							</div>
+						</div>
+						<div class="list-group-separator"></div>
+					</div>
+				</div>
+
+				<!-- Sobre mi -->
+				<div class="well page" id="about" style="display:none;">
+					<h1 class="header">Sobre mi...</h1>
+					<p>
+						Nacido en Santiago de Chile, soy Ingeniero en Informática desarrollador desde temprana edad, amante del Back-End y el asincronismo.
+					</p>
+					<p>
+						La programación es la expresión máxima de liberación para los que nos dedicamos a esto, podemos convertir una idea en algo real, poder realizar un proyecto de inicio a fin, aprendiendo en el camino, desarrollando nuevas ideas, siempre en busca de entregar lo mejor de de ti.
+					</p>
+					<p>
+						La integración del FronEnd con el BackEnd en busca de la resolución de problemas para los usuarios, una interfaz amigable, una base robusta, bajo tiempo de respuesta en las interacciones. Estos detalles hacer de la programación algo emocionante.
+					</p>
+					<p>
+						Poder enseñar lo que sé es algo que también me apasiona, quizás cuando inicie en esta loca aventura no habia mucho de donde conseguir ideas, ahora con la llegada de la internet y las nuevas tecnologías es más fácil para los que recién empiezan buscar información o ideas para poder desarrollar o aprender, es por lo mismo que el contenido que pudiese entender no será siguiendo una guía sino que será en base a mi experiencia en mis años desarrollando, es por lo mismo que existe una sección de ScreenCast, donde mostraré como voy desarrollando la idea.
+					</p>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<script>
+  window.page = window.location.hash || "#inicio";
+
+  $(document).ready(function () {
+    if (window.page != "#inicio") {
+      $(".menu").find("li[data-target=" + window.page + "]").trigger("click");
+    }
+  });
+
+  $(window).on("resize", function () {
+    $("html, body").height($(window).height());
+    $(".main, .menu").height($(window).height() - $(".header-panel").outerHeight());
+    $(".pages").height($(window).height());
+  }).trigger("resize");
+
+  $(".menu li").click(function () {
+    // Menu
+    console.log($(this).data("target"));
+    if (!$(this).data("target")) return;
+    if ($(this).is(".active")) return;
+    $(".menu li").not($(this)).removeClass("active");
+    $(".page").not(page).removeClass("active").hide();
+    window.page = $(this).data("target");
+    var page = $(window.page);
+    window.location.hash = window.page;
+    $(this).addClass("active");
+
+
+    page.show();
+
+    var totop = setInterval(function () {
+      $(".pages").animate({scrollTop: 0}, 0);
+    }, 1);
+
+    setTimeout(function () {
+      page.addClass("active");
+      setTimeout(function () {
+        clearInterval(totop);
+      }, 1000);
+    }, 100);
+  });
+
+  function cleanSource(html) {
+    var lines = html.split(/\n/);
+
+    lines.shift();
+    lines.splice(-1, 1);
+
+    var indentSize = lines[0].length - lines[0].trim().length,
+        re = new RegExp(" {" + indentSize + "}");
+
+    lines = lines.map(function (line) {
+      if (line.match(re)) {
+        line = line.substring(indentSize);
+      }
+
+      return line;
+    });
+
+    lines = lines.join("\n");
+
+    return lines;
+  }
+
+  $("#opensource").click(function () {
+    $.get(window.location.href, function (data) {
+      var html = $(data).find(window.page).html();
+      html = cleanSource(html);
+      $("#source-modal pre").text(html);
+      $("#source-modal").modal();
+    });
+  });
+</script>
