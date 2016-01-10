@@ -1,0 +1,57 @@
+<div class="pages col-xs-9">
+	<div class="row">
+		<div class="col-xs-11">
+			<div class="well page active">					
+				<h1 class="header">
+					<%= @article.title %> 
+					<i class="material-icons"><%= link_to 'edit', edit_article_path(@article) %></i>
+					<i class="material-icons"><%= link_to 'delete', article_path(@article), method: :delete, data: { confirm: 'Estás seguro?'} %></i>
+				</h1>
+				<p><%= @article.text %></p>
+				<h2>Agrega un comentario</h2>
+				<%= form_for([@article, @article.comments.build]) do |f| %>
+					<fieldset>
+						<div class="form-group">
+							<%= f.label :commenter, 'Autor', class: "col-xs-2 control-label", text: 'Titulo'  %>
+							<div class="col-xs-10">
+								<%= f.text_field :commenter, class: "form-control", placeholder: 'Titulo' %>	
+							</div>
+							
+						</div>
+						<div class="form-group">
+							<%= f.label :body, 'Cometario', class: "col-xs-2 control-label" %>
+							<div class="col-xs-10">
+								<%= f.text_area :body, class: "form-control", rows: '3'%>
+								<span class="help-block">Puedes desplazar el scroll del cuadro de texto para subir o bajar</span>
+							</div>
+								
+						</div>
+						<div class="form-group">
+							<div class="col-xs-10">
+								<%= f.submit class: "btn btn-primary" %>	
+							</div>
+						</div>
+					</fieldset>
+					<h3>Comentarios</h3>
+					<div class="list-group">
+						<% @article.comments.each do |comment| %>
+							<div class="list-group-item">
+								<div class="row-picture">
+									<% if comment.body? %>
+									<img class="circle" src="http://lorempixel.com/56/56/people/1" alt="icon">
+									<% end %>
+								</div>
+								<div class="row-content">
+									<h4 class="list-group-item-heading"><%= comment.commenter %></h4>
+									<p class="list-group-item-text"><%= comment.body %></p>
+								</div>
+							</div>
+							<div class="list-group-separator"></div>
+						<% end %>
+					</div>
+				<% end %>
+				<%= link_to 'Back', root_path, class: 'btn btn-primary' %>
+			</div>
+		</div>
+	</div>
+</div>

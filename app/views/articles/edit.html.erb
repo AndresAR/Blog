@@ -2,9 +2,9 @@
 	<div class="row">
 		<div class="col-xs-11">
 			<div class="well page active">
-				<h1 class="header">Nuevo Articulo</h1>
+				<h1 class="header">Editar Articulo</h1>
 				<p>Aquí va cualquier clase de texto</p>
-				<%= form_for :article, url: articles_path, class: 'form-horizontal' do |f| %>
+				<%= form_for :article, url: article_path(@article), class: 'form-horizontal', method: :patch  do |f| %>
 					<% if @article.errors.any? %>
 						Tienes <%= pluralize(@article.errors.count, "error") %>
 						<% @article.errors.full_messages.each do |msg| %>
@@ -42,5 +42,3 @@
 		</div>
 	</div>
 </div>
-
-	
